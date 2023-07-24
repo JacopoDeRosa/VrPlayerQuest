@@ -83,6 +83,7 @@ namespace VrVideoPlayer
             
             string subPath = Application.persistentDataPath + "/" + subUrl;
 
+            Debug.Log("Sub Path is: " + subPath);
             if (File.Exists(subPath))
             {
                 string subs = File.ReadAllText(subPath);
