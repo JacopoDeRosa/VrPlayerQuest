@@ -19,17 +19,12 @@ namespace VrVideoPlayer
         private AppManifest _manifest;
         private VideoPlayer _player;
 
-        private void Awake()
-        {
+        private void Start()
+        { 
             _vrDeviceManager.onUserPresenceChanged += OnUserPresenceChanged;
             _manifest = AppManifest.Instance;
             _player = GetComponent<VideoPlayer>();
             _player.loopPointReached += OnVideoOver;
-        }
-
-        private void Start()
-        {
-            OnUserPresenceChanged(true);
         }
 
         private void OnUserPresenceChanged(bool userPresence)

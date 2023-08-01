@@ -1,18 +1,23 @@
 ﻿using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.XR;
+using CommonUsages = UnityEngine.XR.CommonUsages;
+using InputDevice = UnityEngine.XR.InputDevice;
 
 namespace VrVideoPlayer
 {
     public class VrDeviceManager : MonoBehaviour
     {
         [SerializeField] private TMP_Text _debugText;
+        [SerializeField] private PlayerInput _input;
 
         private bool lastUserPresent = true;
 
         public event Action<bool> onUserPresenceChanged;
       
+        /*
         private void FixedUpdate()
         {
             InputDevice head = InputDevices.GetDeviceAtXRNode(XRNode.Head);
@@ -33,6 +38,24 @@ namespace VrVideoPlayer
                     lastUserPresent = userPresent;
                 }
             }
+           
+        }
+         */
+
+        private void Awake()
+        {
+            _input.actions["UserPresence"].started += OnUserPresenceStarted;
+            _input.actions["UserPresence"].canceled += OnUserPresenceCanceled;
+        }
+
+        private void OnUserPresenceStarted(InputAction.CallbackContext context)
+        {
+            onUserPresenceChanged?.Invoke(true);
+        }
+        
+        private void OnUserPresenceCanceled(InputAction.CallbackContext context)
+        {
+            onUserPresenceChanged?.Invoke(false);
         }
     }
 }
