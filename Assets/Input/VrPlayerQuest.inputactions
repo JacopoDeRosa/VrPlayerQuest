@@ -265,11 +265,11 @@
                 },
                 {
                     "name": "",
-                    "id": "9cd28916-3ec7-486b-88aa-83ca36147320",
-                    "path": "<OculusHMD>/userPresence",
+                    "id": "ce570137-a3dc-41f5-bc6b-439cbb896c48",
+                    "path": "<OculusHMD>/isTracked",
                     "interactions": "",
                     "processors": "",
-                    "groups": "XR;Keyboard&Mouse",
+                    "groups": "XR",
                     "action": "UserPresence",
                     "isComposite": false,
                     "isPartOfComposite": false

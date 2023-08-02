@@ -34,7 +34,7 @@ namespace Network
         
             if(visitor != null) Debug.Log(visitor.language);
 
-            onComplete?.Invoke(visitor != null && request.isNetworkError == false && request.isHttpError == false, visitor);
+            onComplete?.Invoke(visitor != null && request.result == UnityWebRequest.Result.Success, visitor);
         
             request.Dispose();
         }

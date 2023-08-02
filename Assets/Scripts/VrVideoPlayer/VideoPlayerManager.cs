@@ -25,6 +25,7 @@ namespace VrVideoPlayer
             _manifest = AppManifest.Instance;
             _player = GetComponent<VideoPlayer>();
             _player.loopPointReached += OnVideoOver;
+            OnUserPresenceChanged(true);
         }
 
         private void OnUserPresenceChanged(bool userPresence)
