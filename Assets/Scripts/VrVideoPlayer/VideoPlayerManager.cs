@@ -36,7 +36,7 @@ namespace VrVideoPlayer
             {
                 if (success)
                 {
-                    PlayVideo(_manifest.DefaultVideo, visitor.language);
+                    PlayVideo(visitor.age > 18 ? 0 : 1, visitor.language);
                 }
                 else
                 {
