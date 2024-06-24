@@ -27,6 +27,13 @@ namespace Subtitles
             _activeSubtitle = null;
             _activeAsset = asset;
         }
+
+        public void ReleaseSubtitleUI()
+        {
+            _activeSubtitle = null;
+            _nameText.text = "";
+            _contentText.text = "";
+        }
         
         private void Update()
         {

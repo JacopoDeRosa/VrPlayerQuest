@@ -38,6 +38,57 @@ namespace Network
         
             request.Dispose();
         }
+
+        //Questa quando inizia l'esperienza, id deve essere quello del visitor nella prima chiamata
+        public static IEnumerator StartVisitorContent(int visitorId)
+        {
+            string url = AppManifest.Instance.ServerAddress + "/visitor_zones/start_content";
+
+            WWWForm form = new WWWForm();
+            
+            form.AddField("visitor_id", visitorId);
+            form.AddField("zone_id", AppManifest.Instance.DeviceId);
+            
+            Debug.Log("Sending Post Request To: " + url);
+            
+            UnityWebRequest request = UnityWebRequest.Post(url, form);
+        
+            if(AppManifest.Instance.SendServerKey) request.SetRequestHeader(AppManifest.Instance.ServerKeyName, AppManifest.Instance.ServerKey);
+
+            yield return request.SendWebRequest();
+            
+            Debug.Log("Start Request Result is: " + request.downloadHandler.text);
+        }
+        
+        //Questa quando finisce l'esperienza, id deve essere quello del visitor nella prima chiamata
+        public static IEnumerator StopVisitorContent(int visitorId)
+        {
+            string url = AppManifest.Instance.ServerAddress + "/visitor_zones/stop_content";
+            
+            WWWForm form = new WWWForm();
+            
+            form.AddField("visitor_id", visitorId);
+            form.AddField("zone_id", AppManifest.Instance.DeviceId);
+            
+            Debug.Log("Sending Post Request To: " + url);
+            
+            UnityWebRequest request = UnityWebRequest.Post(url, form);
+        
+            if(AppManifest.Instance.SendServerKey) request.SetRequestHeader(AppManifest.Instance.ServerKeyName, AppManifest.Instance.ServerKey);
+
+            yield return request.SendWebRequest();
+            
+            Debug.Log("Stop Request Result is: " + request.downloadHandler.text);
+        }
+        
     
     }
+
+    [Serializable]
+    public class VisitorAudioData
+    {
+        public int visitor_id;
+        public int zone_id;
+    }
+   
 }

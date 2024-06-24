@@ -3,7 +3,7 @@
     [System.Serializable]
     public class VisitorInZone
     {
-        public int visistor_id;
+        public int visitor_id;
         public int tag_id;
         public int zone_id;
         public int age;

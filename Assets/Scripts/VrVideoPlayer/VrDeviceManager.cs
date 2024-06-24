@@ -40,6 +40,12 @@ namespace VrVideoPlayer
             }
            
         }
-         
+
+        public void ToggleUserPresence()
+        {
+            lastUserPresent = !lastUserPresent;
+            onUserPresenceChanged.Invoke(lastUserPresent);
+        }
+
     }
 }

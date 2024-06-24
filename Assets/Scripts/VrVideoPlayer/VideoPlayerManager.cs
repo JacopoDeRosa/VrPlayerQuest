@@ -14,7 +14,8 @@ namespace VrVideoPlayer
         [SerializeField] private PlayableDirector _intro, _outro;
         [SerializeField] private RenderTexture _texture;
         [SerializeField] private SubtitleController _subtitleController;
-    
+
+        private int _activeVisitorId = 1;
     
         private AppManifest _manifest;
         private VideoPlayer _player;
@@ -36,7 +37,9 @@ namespace VrVideoPlayer
             {
                 if (success)
                 {
+                    _activeVisitorId = visitor.visitor_id;
                     PlayVideo(visitor.age > 18 ? 0 : 1, visitor.language);
+                    StartCoroutine(Networking.StartVisitorContent(_activeVisitorId));
                 }
                 else
                 {
@@ -44,12 +47,15 @@ namespace VrVideoPlayer
                 }
             }
         
-            if (userPresence == true)
+            if (userPresence)
             {
                 StartCoroutine(Networking.GetVisitorInZoneRoutine(OnCallback));
             }
             else
             {
+                StartCoroutine(Networking.StopVisitorContent(_activeVisitorId));
+                _activeVisitorId = 0;
+                _subtitleController.ReleaseSubtitleUI();
                 _player.Stop();
             }
         }
